@@ -7,7 +7,7 @@ public class OrderController {
         this.orderService = orderService;
     }
 
-    public void createOrder(Order order) {
-        orderService.createOrder(order);
+    public void createOrder(Order ordre) {
+        orderService.createOrder(ordre);
     }
 }

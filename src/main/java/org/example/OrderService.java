@@ -7,7 +7,7 @@ public class OrderService {
         this.orderDao = orderDao;
     }
 
-    public void createOrder(Order order) {
-        orderDao.saveOrder(order);
+    public void createOrder(Order ordre) {
+        orderDao.saveOrder(ordre);
     }
 }

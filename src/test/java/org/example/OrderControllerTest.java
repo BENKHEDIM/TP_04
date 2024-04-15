@@ -6,28 +6,26 @@ public class OrderControllerTest {
 
     @Test
     public void testCreateOrder() {
-        // Création du mock pour OrderService
+        // Création des mocks
         OrderService orderServiceMock = mock(OrderService.class);
-
-        // Création du mock pour OrderDao
         OrderDao orderDaoMock = mock(OrderDao.class);
 
-        // Injection du mock de OrderDao dans le constructeur de OrderService
-        OrderService orderService = new OrderService(orderDaoMock);
+        // Initialisation du contrôleur avec le mock du service
+        OrderController orderController = new OrderController(orderServiceMock);
 
-        // Création de l'objet OrderController à tester avec le mock de OrderService
-        OrderController orderController = new OrderController(orderService);
+        // Création d'un ordre
+        Order ordre = new Order(1,"Dummy",30);
 
-        // Création d'un objet de commande fictif
-        Order order = new Order(1234, "Nom du client");
+        // Définition du comportement attendu des mocks
+        doNothing().when(orderServiceMock).createOrder(ordre);
+        doNothing().when(orderDaoMock).saveOrder(ordre);
 
         // Appel de la méthode à tester
-        orderController.createOrder(order);
+        orderController.createOrder(ordre);
 
-        // Vérification que OrderService.createOrder est appelé avec le bon argument
-        verify(orderServiceMock).createOrder(order);
+        // Vérification que la méthode du service est appelée avec le bon argument
+        verify(orderServiceMock).createOrder(ordre);
 
-        // Vérification que OrderDao.saveOrder est appelé avec l'objet de commande créé
-        verify(orderDaoMock).saveOrder(order);
+
     }
 }
